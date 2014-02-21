@@ -6,11 +6,10 @@ require 'retail_calendar/version'
 Gem::Specification.new do |spec|
   spec.name          = "retail_calendar"
   spec.version       = RetailCalendar::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["David Balatero"]
   spec.email         = ["dbalatero@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Allows you to get date ranges for the 4-5-4 retail calendar.}
+  spec.homepage      = "https://github.com/Totokaelo/retail_calendar"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -20,4 +19,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "guard-rspec"
 end
