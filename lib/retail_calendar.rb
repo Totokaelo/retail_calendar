@@ -1,5 +1,8 @@
 require "retail_calendar/version"
+require 'retail_calendar/range_finder'
 
 module RetailCalendar
-  # Your code goes here...
+  def self.range(month, year)
+    RetailCalendar::RangeFinder.for_month(month, year)
+  end
 end
