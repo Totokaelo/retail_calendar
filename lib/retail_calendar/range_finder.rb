@@ -40,8 +40,8 @@ module RetailCalendar
       final_month = start_month + month_diff
 
       # Add weeks offset
-      start_month.upto(start_month + month_diff - 1) do |month|
-        start_time += weeks_in_month(month % 12).weeks
+      start_month.upto(start_month + month_diff - 1) do |current_month|
+        start_time += weeks_in_month(current_month % 12).weeks
       end
 
       # Compute end time.

@@ -18,6 +18,22 @@ describe RetailCalendar::RangeFinder do
       expect(range).to eq(start..finish)
     end
 
+    it "should work in December 2013" do
+      range = described_class.for_month(12, 2013)
+      start = beginning_of_day(2013, 12, 1)
+      finish = end_of_day(2014, 1, 4)
+
+      expect(range).to eq(start..finish)
+    end
+
+    it "should work in January 2014" do
+      range = described_class.for_month(1, 2014)
+      start = beginning_of_day(2014, 1, 5)
+      finish = end_of_day(2014, 2, 1)
+
+      expect(range).to eq(start..finish)
+    end
+
     it "should work in December" do
       range = described_class.for_month(12, 2015)
       start = beginning_of_day(2015, 11, 29)
