@@ -1,28 +1,5 @@
 module RetailCalendar
   class RangeFinder
-    @@years = {
-      2000 => Time.utc(2000, 1, 30),
-      2001 => Time.utc(2001, 2, 4),
-      2002 => Time.utc(2002, 2, 3),
-      2003 => Time.utc(2003, 2, 2),
-      2004 => Time.utc(2004, 2, 1),
-      2005 => Time.utc(2005, 1, 30),
-      2006 => Time.utc(2006, 1, 29),
-      2007 => Time.utc(2007, 2, 4),
-      2008 => Time.utc(2008, 2, 3),
-      2009 => Time.utc(2009, 2, 1),
-      2010 => Time.utc(2010, 1, 31),
-      2011 => Time.utc(2011, 1, 30),
-      2012 => Time.utc(2012, 1, 29),
-      2013 => Time.utc(2013, 2, 3),
-      2014 => Time.utc(2014, 2, 2),
-      2015 => Time.utc(2015, 2, 1),
-      2016 => Time.utc(2016, 1, 31),
-      2017 => Time.utc(2017, 1, 29),
-      2018 => Time.utc(2018, 2, 4)
-    }
-
-    @@extra_weeks = [2006, 2012, 2017]
 
     def self.for_month(month, year)
       month = month.to_i
@@ -77,7 +54,17 @@ module RetailCalendar
     end
 
     def self.start_time_for_year(year)
-      @@years.fetch(year).beginning_of_day
+      year = year.to_i
+      jan31 = DateTime.new(year,1,31)
+      jan31day = jan31.cwday
+      if jan31day < 3
+        start = jan31 - jan31day
+      elsif jan31day < 7
+        start = jan31 + (7 - jan31day)
+      elsif jan31day == 7
+        start = jan31
+      end
+      start
     end
 
     def self.weeks_in_month(month)
@@ -86,7 +73,10 @@ module RetailCalendar
     end
 
     def self.year_has_extra_week?(year)
-      @@extra_weeks.include?(year)
+      year = year.to_i
+      expected = self.start_time_for_year(year) + 364
+      actual = self.start_time_for_year(year + 1)
+      actual > expected ? true : false
     end
   end
 end
